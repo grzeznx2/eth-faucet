@@ -52,6 +52,14 @@ function App() {
     web3Api.web3 && getAccount()
   }, [web3Api.web3])
 
+  const addFunds = async () => {
+    const { contract, web3 } = web3Api
+    await contract.addFunds({
+      from: account,
+      value: web3.utils.toWei('1', 'ether'),
+    })
+  }
+
   const handleConnect = () => {
     web3Api.provider && web3Api.provider.request({ method: 'eth_requestAccounts' })
   }
@@ -77,7 +85,9 @@ function App() {
           <div className="balance-view is-size-2 my-5">
             Current Balance: <strong>{balance}</strong> ETH
           </div>
-          <button className="button is-primary mr-2">Donate</button>
+          <button onClick={addFunds} className="button is-primary mr-2">
+            Donate 1 ETH
+          </button>
           <button className="button is-link">Withdraw</button>
         </div>
       </div>
