@@ -5,12 +5,26 @@ contract Faucet{
 uint public numOfFunders;
 mapping(address=>bool) private funders;
 mapping(uint=>address) private lutFunders;
+address public owner;
+
+constructor(){
+    owner = msg.sender;
+}
 
 receive() external payable{}
+
+modifier onlyOwner {
+    require(msg.sender == owner, 'Only contract owner can perform this action');
+    _;
+}
 
 modifier limitWithdraw(uint amount){
     require(amount <= 1000000000000000000, 'Cannot withdraw more than 0.1 ETH' );
     _;
+}
+
+function transferOwnership(address newOwner) external onlyOwner{
+    owner = newOwner;
 }
 
 function addFunds() external payable{
