@@ -36,19 +36,33 @@ function App() {
     web3Api.web3 && getAccount()
   }, [web3Api.web3])
 
+  const handleConnect = () => {
+    web3Api.provider && web3Api.provider.request({ method: 'eth_requestAccounts' })
+  }
+
   return (
     <div className="app-wrapper">
       <div className="faucet-wrapper">
         <div className="faucet">
-          <span>
-            <strong>Account</strong>
-          </span>
-          <h1>{account ? account : 'not connected'}</h1>
-          <div className="balance-view is-size-2">
+          <div className="is-flex is-align-items-center">
+            <span className="mr-2">
+              <strong>Account</strong>
+            </span>
+            <div>
+              {account ? (
+                account
+              ) : (
+                <button onClick={handleConnect} className="button is-small">
+                  Connect
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="balance-view is-size-2 my-5">
             Current Balance: <strong>10</strong> ETH
           </div>
-          <button className="btn mr-2">Donate</button>
-          <button className="btn">Withdraw</button>
+          <button className="button is-primary mr-2">Donate</button>
+          <button className="button is-link">Withdraw</button>
         </div>
       </div>
     </div>
