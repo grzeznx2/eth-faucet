@@ -12,7 +12,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -25,11 +26,13 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "stateMutability": "payable",
-      "type": "receive"
+      "type": "receive",
+      "payable": true
     },
     {
       "inputs": [
@@ -49,7 +52,8 @@
       "name": "addFunds",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -81,7 +85,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -94,7 +99,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"addFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllFunders\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getFunderAt\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numOfFunders\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdrawFunds\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/FaucetContract.sol\":\"Faucet\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/FaucetContract.sol\":{\"keccak256\":\"0xf46a87ba584b0bf3a38565c396bfb78b7886ef207a32add3946cf591b443a175\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cbd6a21dae1a44419829dfdfc44c96a17ba2ec08f3caaf4dde76c32f7bb869c4\",\"dweb:/ipfs/QmdoJDEumgi5YQKpNJeJSF8Fdy61puXiurTzBdwQzuHMqc\"]},\"project:/contracts/IFaucet.sol\":{\"keccak256\":\"0xbd28598793b1b5b275bf78f5432a88f020e46b5ec9ac4e0458aae6a84705e2da\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://708864b11c44078d32386a5a9cd39b01a7b0b1b559379977c99a53d320338a7d\",\"dweb:/ipfs/QmbePQchRnXZEoQo91NdqiHEtxcZVVU5qtnAJn5s6hY9CT\"]},\"project:/contracts/Owned.sol\":{\"keccak256\":\"0x551cbf0e0469d153b9f3e1aa04605eddcb8bb055bc9c5825de5dc6f07e09acd2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e63b5fbae7d4ca3b700480596d58da868be8d2e29bf4fb700fd6e77acb2b0393\",\"dweb:/ipfs/QmUSTcQY41AYnMkibaiwBGpxhezmGqYN7PjxeuAPYYd8Ue\"]}},\"version\":1}",
@@ -6715,9 +6721,17 @@
     "name": "solc",
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x7DFD990B8Dd3748dadE547F1374d1d795EFf7977",
+      "transactionHash": "0x49addab42b3136d00a731e1c889e973e6e1be710f054799003c07afbba20f855"
+    }
+  },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-16T16:10:23.304Z",
+  "updatedAt": "2021-11-16T16:27:12.060Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
