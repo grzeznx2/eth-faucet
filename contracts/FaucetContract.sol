@@ -2,15 +2,33 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract Faucet{
-address[] funders;
+uint public numOfFunders;
+mapping(address=>bool) private funders;
+mapping(uint=>address) private lutFunders;
 
 receive() external payable{}
 
 function addFunds() external payable{
-    funders.push(msg.sender);
+    address funder = msg.sender;
+
+    if(!funders[funder]){
+        funders[funder] = true;
+        lutFunders[numOfFunders] = funder;
+        numOfFunders++;
+    }
+}
+
+function getFunderAt(uint index) external view returns(address){
+    return lutFunders[index];
 }
 
 function getAllFunders() external view returns( address[] memory){
-    return funders;
+    address[] memory _funders = new address[](numOfFunders);
+
+    for(uint i = 0; i < numOfFunders; i++){
+        _funders[i] = lutFunders[i];
+    }
+
+    return _funders;
 }
 }
