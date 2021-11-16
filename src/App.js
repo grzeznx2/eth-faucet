@@ -15,10 +15,14 @@ function App() {
   const [balance, setBalance] = useState(null)
   const [shouldReload, setShouldReload] = useState(false)
 
+  const networkHasContract = account && web3Api.contract
+
   const reload = useCallback(() => setShouldReload(!shouldReload), [shouldReload])
 
-  const setAccountListener = provider =>
+  const setAccountListener = provider => {
     provider.on('accountsChanged', accounts => setAccount(accounts[0]))
+    provider.on('chainChanged', _ => window.location.reload())
+  }
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -113,10 +117,15 @@ function App() {
           <div className="balance-view is-size-2 my-5">
             Current Balance: <strong>{balance}</strong> ETH
           </div>
-          <button disabled={!account} onClick={addFunds} className="button is-primary mr-2">
+          {!networkHasContract && <i className="is-block">Connect to Ganache</i>}
+          <button
+            disabled={!networkHasContract}
+            onClick={addFunds}
+            className="button is-primary mr-2"
+          >
             Donate 1 ETH
           </button>
-          <button disabled={!account} onClick={withdrawFunds} className="button is-link">
+          <button disabled={!networkHasContract} onClick={withdrawFunds} className="button is-link">
             Withdraw 0.1 ETH
           </button>
         </div>
