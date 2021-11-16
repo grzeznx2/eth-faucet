@@ -8,6 +8,11 @@ mapping(uint=>address) private lutFunders;
 
 receive() external payable{}
 
+modifier limitWithdraw(uint amount){
+    require(amount <= 1000000000000000000, 'Cannot withdraw more than 0.1 ETH' );
+    _;
+}
+
 function addFunds() external payable{
     address funder = msg.sender;
 
@@ -16,6 +21,10 @@ function addFunds() external payable{
         lutFunders[numOfFunders] = funder;
         numOfFunders++;
     }
+}
+
+function withdrawFunds(uint amount) external limitWithdraw(amount) {
+    payable(msg.sender).transfer(amount);
 }
 
 function getFunderAt(uint index) external view returns(address){
