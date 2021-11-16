@@ -64,6 +64,13 @@ function App() {
     reload()
   }
 
+  const withdrawFunds = async () => {
+    const { contract, web3 } = web3Api
+    const amount = web3.utils.toWei('0.1', 'ether')
+    await contract.withdrawFunds(amount, { from: account })
+    reload()
+  }
+
   const handleConnect = () => {
     web3Api.provider && web3Api.provider.request({ method: 'eth_requestAccounts' })
   }
@@ -92,7 +99,9 @@ function App() {
           <button onClick={addFunds} className="button is-primary mr-2">
             Donate 1 ETH
           </button>
-          <button className="button is-link">Withdraw</button>
+          <button onClick={withdrawFunds} className="button is-link">
+            Withdraw 0.1 ETH
+          </button>
         </div>
       </div>
     </div>
