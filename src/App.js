@@ -7,6 +7,7 @@ import { loadContract } from './utils/load-contract'
 function App() {
   const [web3Api, setWeb3Api] = useState({
     provider: null,
+    isLoaded: false,
     web3: null,
     contract: null,
   })
@@ -28,10 +29,12 @@ function App() {
         setAccountListener(provider)
         setWeb3Api({
           web3: new Web3(provider),
+          isLoaded: true,
           provider,
           contract,
         })
       } else {
+        setWeb3Api(web3Api => ({ ...web3Api, isLoaded: true }))
         console.log('Please install MetaMask')
       }
     }
@@ -82,20 +85,31 @@ function App() {
     <div className="app-wrapper">
       <div className="faucet-wrapper">
         <div className="faucet">
-          <div className="is-flex is-align-items-center">
-            <span className="mr-2">
-              <strong>Account</strong>
-            </span>
-            <div>
-              {account ? (
-                account
-              ) : (
-                <button onClick={handleConnect} className="button is-small">
-                  Connect
-                </button>
-              )}
+          {web3Api.isLoaded ? (
+            <div className="is-flex is-align-items-center">
+              <span className="mr-2">
+                <strong>Account</strong>
+              </span>
+              <div>
+                {account ? (
+                  account
+                ) : web3Api.provider ? (
+                  <button onClick={handleConnect} className="button is-small">
+                    Connect
+                  </button>
+                ) : (
+                  <div className="notification is-warning is-small is-rounded">
+                    Wallet not detected.{' '}
+                    <a target="_blank" rel="noreferrer" href="https://docs.metamask.io">
+                      Please install MetaMask
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          ) : (
+            <span>Looking for web3...</span>
+          )}
           <div className="balance-view is-size-2 my-5">
             Current Balance: <strong>{balance}</strong> ETH
           </div>
