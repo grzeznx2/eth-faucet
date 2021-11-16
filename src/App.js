@@ -7,6 +7,7 @@ function App() {
     provider: null,
     web3: null,
   })
+  const [account, setAccount] = useState(null)
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -15,6 +16,11 @@ function App() {
 
       if (ethereum) {
         provider = ethereum
+        try {
+          await provider.request({ method: 'eth_requestAccounts' })
+        } catch (error) {
+          console.error('User denied access')
+        }
       } else if (web3) {
         provider = web3.currentProvider
       } else if (!process.env.production) {
@@ -30,10 +36,23 @@ function App() {
     loadProvider()
   }, [])
 
+  useEffect(() => {
+    const getAccount = async () => {
+      const accounts = await web3Api.web3.eth.getAccounts()
+      setAccount(accounts[0])
+    }
+
+    web3Api.web3 && getAccount()
+  }, [web3Api.web3])
+
   return (
     <div className="app-wrapper">
       <div className="faucet-wrapper">
         <div className="faucet">
+          <span>
+            <strong>Account</strong>
+          </span>
+          <h1>{account ? account : 'not connected'}</h1>
           <div className="balance-view is-size-2">
             Current Balance: <strong>10</strong> ETH
           </div>
